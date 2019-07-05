@@ -33,17 +33,67 @@ console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]));
 // El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va 
 // desde el 1 (enero) hasta el 12 (diciembre).
 // console.log( vendedoraDelMes(1, 2019) ); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+// filtrar todas las ventas por mes y anio. Filtrar las ventas que hizo esa vendedora, una vez que las obtenemos 
+//las sumamos con precioMaquina. Con un bucle por cada venta que hizo grace llamamos a precioMaquina y le pasamos 
+// parametro componentes de cada venta. Y sumamos cada uno de los totales de cada venta.
+//Eso nos va a dar el total de las ventas que hizo grace en un mes y en un año. 
+//Hasta aca obtuvimos las ventas de un mes y un año pero queremos recorrer todas las vendedoras-
+//Por cada una de las vendedoras hago lo mismo, fitrar las ventas que hizo esa vendedora Por cada una de esas 
+//ventas. A medida que obtenemos el total de una vendedora lo vamos guardando en una variable y comparando
+// con el valor anterior. Y si va superando guardamos el nombre de la vendedora y seguimos adelante.
+// pensando en una vendedora especifica por ejemplo grace: obtener todas las ventas de grace y sumarlas
+//
+//
 
 //Recorrer todos los componentes vendidos e ir sumandoselos a la vendedora que corresponda
 
-// const vendedoraDelMes = (mes, anio) => {
+const vendedoraDelMes = (mes, anio) => {
 
-//     if (){
-//         return 
+    const filtrarPorMes = venta =>
+    venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio;
+
+    const resultado = local.ventas.filter(filtrarPorMes);
+    let maximoVendido = 0;
+    let vendedoraQueMasVendio = "";
+
+    for (let vendedora of local.vendedoras) {
+
+        let ventasVendedora= 0;
+
+        for (const venta of resultado) {
+            let vendedoraVendio = venta.nombreVendedora 
+            if (vendedoraVendio === vendedora) {
+                ventasVendedora += precioMaquina(venta.componentes);
+            }
+        }
+        if (ventasVendedora > maximoVendido){
+            maximoVendido = ventasVendedora;
+            vendedoraQueMasVendio = vendedora;
+        }
+    }
+    return vendedoraQueMasVendio;
+
+
+}
+console.log(vendedoraDelMes(1, 2019));
+
+// const artistaConMasEntradasVendidas = () => {
+//     let masEntradasVendidas = 0;
+//     let artistasConMasEntradas = [];
+
+//     for (const artista of artistas) {
+//         if (artista.ultimoRecital.entradasVendidas >= masEntradasVendidas) {
+//             masEntradasVendidas = artista.ultimoRecital.entradasVendidas;
+//             artistasConMasEntradas.push(artista);
+//         }
 //     }
+
+//     const masEntradas = artista => artista.ultimoRecital.entradasVendidas === masEntradasVendidas
+    
+//     return artistasConMasEntradas.filter(masEntradas);
 // }
 
-// console.log(vendedoraDelMes(1, 2019));
+// console.log(artistaConMasEntradasVendidas());
 
 
 // 1.5 ventasVendedora(nombre)

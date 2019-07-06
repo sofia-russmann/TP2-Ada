@@ -1,16 +1,5 @@
 // TRABAJO PRÁCTICO NÚMERO 2
 // Integrantes: Gleyser y Sofía.
-// Ejercicios:
-//1- Funciones:
-//precioMaquina(componentes) SOFI
-// cantidadVentasComponente(componente): GLEY
-// vendedoraDelMes(mes, anio) usar precioMaquina SOFI 
-// ventasMes(mes, anio): GLEY
-// ventasVendedora(nombre): SOFI
-// componenteMasVendido(): usar cantidadVentasComponente GLEY
-// huboVentas(mes, anio): SOFI
-//2-SOFI
-//3-GLEY
 
 //1.1 precioMaquina(componentes)
 
@@ -27,25 +16,7 @@ const precioMaquina = componentes => {
 }
 console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]));
 
-
-// 1.3 vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de 
-// la vendedora que más vendió en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas.
-// El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va 
-// desde el 1 (enero) hasta el 12 (diciembre).
-// console.log( vendedoraDelMes(1, 2019) ); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
-// filtrar todas las ventas por mes y anio. Filtrar las ventas que hizo esa vendedora, una vez que las obtenemos 
-//las sumamos con precioMaquina. Con un bucle por cada venta que hizo grace llamamos a precioMaquina y le pasamos 
-// parametro componentes de cada venta. Y sumamos cada uno de los totales de cada venta.
-//Eso nos va a dar el total de las ventas que hizo grace en un mes y en un año. 
-//Hasta aca obtuvimos las ventas de un mes y un año pero queremos recorrer todas las vendedoras-
-//Por cada una de las vendedoras hago lo mismo, fitrar las ventas que hizo esa vendedora Por cada una de esas 
-//ventas. A medida que obtenemos el total de una vendedora lo vamos guardando en una variable y comparando
-// con el valor anterior. Y si va superando guardamos el nombre de la vendedora y seguimos adelante.
-// pensando en una vendedora especifica por ejemplo grace: obtener todas las ventas de grace y sumarlas
-//
-//
-
-//Recorrer todos los componentes vendidos e ir sumandoselos a la vendedora que corresponda
+// 1.3 vendedoraDelMes(mes, anio)
 
 const vendedoraDelMes = (mes, anio) => {
 
@@ -73,28 +44,8 @@ const vendedoraDelMes = (mes, anio) => {
     }
     return vendedoraQueMasVendio;
 
-
 }
 console.log(vendedoraDelMes(1, 2019));
-
-// const artistaConMasEntradasVendidas = () => {
-//     let masEntradasVendidas = 0;
-//     let artistasConMasEntradas = [];
-
-//     for (const artista of artistas) {
-//         if (artista.ultimoRecital.entradasVendidas >= masEntradasVendidas) {
-//             masEntradasVendidas = artista.ultimoRecital.entradasVendidas;
-//             artistasConMasEntradas.push(artista);
-//         }
-//     }
-
-//     const masEntradas = artista => artista.ultimoRecital.entradasVendidas === masEntradasVendidas
-    
-//     return artistasConMasEntradas.filter(masEntradas);
-// }
-
-// console.log(artistaConMasEntradasVendidas());
-
 
 // 1.5 ventasVendedora(nombre)
 
@@ -111,7 +62,6 @@ const ventasVendedora = nombre =>
 }
 console.log(ventasVendedora("Grace"));
 
-
 // 1.7 huboVentas(mes, anio)
 
 const huboVentas = (mes, anio) => {
@@ -125,17 +75,6 @@ const huboVentas = (mes, anio) => {
 }
 console.log(huboVentas(1, 2019));
 
-
-// 2
-
-//Recorrer cada item de ventas y agregar "sucursal["Centro"]"
-//En las ventas ya existentes, tenemos que agregar la propiedad sucursal con el valor Centro
-// (ya que es la sucursal original).
-// En cada venta del local agregar luego de componentes "sucursal" con el valor "centro"
-//sucursal: "Centro"
-// 
-
-
 // 2.1
 
 const agregarSucursalCentro = () => {
@@ -145,11 +84,9 @@ const agregarSucursalCentro = () => {
 }
 agregarSucursalCentro();
 
-
 // 2.2
 
 local.sucursales = ['Centro', 'Caballito'];
-
 
 // 2.3
 
@@ -173,7 +110,6 @@ const dataVentasActualizadas = [
 let ventasActualizadas = local.ventas.concat(dataVentasActualizadas);
 local.ventas = ventasActualizadas;
 
-
 //2.4 ventasSucursal(sucursal)
 
 const ventasSucursal = sucursal => 
@@ -195,13 +131,34 @@ console.log(ventasSucursal("Centro"));
 // pero trabajando con una propiedad distinta.
 // Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
-
 // 2.6 sucursalDelMes(mes, anio)
 
-//Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y devuelve el 
-// nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas.
-// El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va desde 
-// el 1 (enero) hasta el 12 (diciembre).
+const sucursalDelMes = (mes, anio) => {
 
+    const filtrarPorMes = venta =>
+    venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio;
 
+    const resultado = local.ventas.filter(filtrarPorMes);
+    let maximoVendido = 0;
+    let sucursalQueMasVendio = "";
+
+    for (let sucursal of local.sucursales) {
+
+        let ventasSucursal= 0;
+
+        for (const venta of resultado) {
+            let sucursalVendio = venta.sucursal 
+            if (sucursalVendio === sucursal) {
+                ventasSucursal += precioMaquina(venta.componentes);
+            }
+        }
+        if (ventasSucursal > maximoVendido){
+            maximoVendido = ventasSucursal;
+            sucursalQueMasVendio = sucursal;
+        }
+    }
+    return sucursalQueMasVendio;
+
+}
+console.log(sucursalDelMes(1, 2019) ); // "Centro"
 

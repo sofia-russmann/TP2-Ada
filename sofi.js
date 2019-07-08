@@ -127,9 +127,19 @@ console.log(ventasSucursal("Centro"));
 
 // 2.5
 
-//Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad 
-// pero trabajando con una propiedad distinta.
-// Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
+//Propongo una función general donde pueda jugarse con las variables "sucursal" y "vendedora"
+
+const ventas = variable => 
+{
+    let sumaTotal= 0;
+    for (const venta of local.ventas) {
+        let ventaPorVariable = venta.variable 
+        if (ventaPorVariable === variable) {
+            sumaTotal += precioMaquina(venta.componentes);
+        }
+    }
+    return sumaTotal;
+}
 
 // 2.6 sucursalDelMes(mes, anio)
 

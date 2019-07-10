@@ -10,7 +10,7 @@ const precioMaquina = componentes => {
             if (component === compo.componente) {
                 precioTotal += compo.precio;
             }
-        } 
+        }
     }
     return precioTotal;
 }
@@ -21,7 +21,7 @@ console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]));
 const vendedoraDelMes = (mes, anio) => {
 
     const filtrarPorMes = venta =>
-    venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio;
+        venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio;
 
     const resultado = local.ventas.filter(filtrarPorMes);
     let maximoVendido = 0;
@@ -29,15 +29,15 @@ const vendedoraDelMes = (mes, anio) => {
 
     for (let vendedora of local.vendedoras) {
 
-        let ventasVendedora= 0;
+        let ventasVendedora = 0;
 
         for (const venta of resultado) {
-            let vendedoraVendio = venta.nombreVendedora 
+            let vendedoraVendio = venta.nombreVendedora
             if (vendedoraVendio === vendedora) {
                 ventasVendedora += precioMaquina(venta.componentes);
             }
         }
-        if (ventasVendedora > maximoVendido){
+        if (ventasVendedora > maximoVendido) {
             maximoVendido = ventasVendedora;
             vendedoraQueMasVendio = vendedora;
         }
@@ -49,11 +49,10 @@ console.log(vendedoraDelMes(1, 2019));
 
 // 1.5 ventasVendedora(nombre)
 
-const ventasVendedora = nombre => 
-{
-    let ventasVendedora= 0;
+const ventasVendedora = nombre => {
+    let ventasVendedora = 0;
     for (const venta of local.ventas) {
-        let vendedoraVendio = venta.nombreVendedora 
+        let vendedoraVendio = venta.nombreVendedora
         if (vendedoraVendio === nombre) {
             ventasVendedora += precioMaquina(venta.componentes);
         }
@@ -65,9 +64,9 @@ console.log(ventasVendedora("Grace"));
 // 1.7 huboVentas(mes, anio)
 
 const huboVentas = (mes, anio) => {
-    
+
     const filtrarPorMes = venta =>
-    venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio;
+        venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio;
 
     const resultado = local.ventas.filter(filtrarPorMes);
 
@@ -112,11 +111,10 @@ local.ventas = ventasActualizadas;
 
 //2.4 ventasSucursal(sucursal)
 
-const ventasSucursal = sucursal => 
-{
-    let cantidadDeVentas= 0;
+const ventasSucursal = sucursal => {
+    let cantidadDeVentas = 0;
     for (const venta of local.ventas) {
-        let ventaPorSucursal = venta.sucursal 
+        let ventaPorSucursal = venta.sucursal
         if (ventaPorSucursal === sucursal) {
             cantidadDeVentas += precioMaquina(venta.componentes);
         }
@@ -129,11 +127,10 @@ console.log(ventasSucursal("Centro"));
 
 //Propongo una función general donde pueda jugarse con las variables "sucursal" y "vendedora"
 
-const ventas = variable => 
-{
-    let sumaTotal= 0;
+const ventas = variable => {
+    let sumaTotal = 0;
     for (const venta of local.ventas) {
-        let ventaPorVariable = venta.variable 
+        let ventaPorVariable = venta.variable
         if (ventaPorVariable === variable) {
             sumaTotal += precioMaquina(venta.componentes);
         }
@@ -146,7 +143,7 @@ const ventas = variable =>
 const sucursalDelMes = (mes, anio) => {
 
     const filtrarPorMes = venta =>
-    venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio;
+        venta.fecha.getMonth() === mes - 1 && venta.fecha.getFullYear() === anio;
 
     const resultado = local.ventas.filter(filtrarPorMes);
     let maximoVendido = 0;
@@ -154,15 +151,15 @@ const sucursalDelMes = (mes, anio) => {
 
     for (let sucursal of local.sucursales) {
 
-        let ventasSucursal= 0;
+        let ventasSucursal = 0;
 
         for (const venta of resultado) {
-            let sucursalVendio = venta.sucursal 
+            let sucursalVendio = venta.sucursal
             if (sucursalVendio === sucursal) {
                 ventasSucursal += precioMaquina(venta.componentes);
             }
         }
-        if (ventasSucursal > maximoVendido){
+        if (ventasSucursal > maximoVendido) {
             maximoVendido = ventasSucursal;
             sucursalQueMasVendio = sucursal;
         }
@@ -170,5 +167,5 @@ const sucursalDelMes = (mes, anio) => {
     return sucursalQueMasVendio;
 
 }
-console.log(sucursalDelMes(1, 2019) ); // "Centro"
+console.log(sucursalDelMes(1, 2019)); // 
 

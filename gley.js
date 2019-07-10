@@ -17,7 +17,7 @@ const cantidadVentasComponente = (componenteABuscar) => {
 
 console.log(cantidadVentasComponente("Monitor ASC 543"));
 
-//1.4 ventasMes(mes, anio)
+// 1.4 ventasMes(mes, anio)
 
 const ventasMes = (mes, anio) => {
 
@@ -32,7 +32,7 @@ const ventasMes = (mes, anio) => {
 
 console.log(`${ventasMes(1, 2019)}`);
 
-//1.6 componenteMasVendido()
+// 1.6 componenteMasVendido()
 
 const componenteMasVendido = () => {
     const componentes = local.precios.map(elemento => elemento.componente)

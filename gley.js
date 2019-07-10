@@ -39,7 +39,7 @@ const ventasMes = (mes, anio) => {
 
     const totalVentasMes = ventaMesYAnio.map(ventasM => ventasM.componentes);
 
-    const ventasTotales = totalVentasMes.map(componente => precioMaquina(componente)).reduce((a, b) => a + b);
+    const ventasTotales = totalVentasMes.map(componente => precioMaquina(componente)).reduce((a, b) => a + b, 0);
 
     return ventasTotales;
 }
@@ -78,29 +78,28 @@ const renderPorMes = () => {
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
         "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-    const ventasTotales = [];
+    const anios = obtenerAnios()
 
-    for (let i = 0; i < meses.length; i++) {
-        const esteMes = ventas =>
-            (ventas.fecha.getMonth() === i);
-        const filtroEsteMes = local.ventas.filter(esteMes);
-
-        let ventaDelMes = 0;
-        filtroEsteMes.forEach(venta => {
-            venta.componentes.forEach(j => {
-                ventaDelMes += precioMaquina(j)
-            });
-        });
-
-        ventasTotales.push({ mes: meses[i], year: 2019, ventas: ventaDelMes })
-    }
     let resultado = `Ventas por mes: \n`
-    ventasTotales.forEach(venta => {
-        if (venta.ventas > 0) {
-            resultado += `Total de ${venta.mes} ${venta.year}: ${venta.ventas} \n`
+    for (let j = 0; j < anios.length; j++) {
+        for (let i = 0; i < meses.length; i++) {
+            if (ventasMes(i + 1, anios[j]) > 0) {
+                resultado += `Total de ${meses[i]} ${anios[j]}: ${ventasMes(i + 1, anios[j])} \n`
+            }
         }
-    })
+    }
+
     return resultado;
+}
+
+const obtenerAnios = () => {
+    const anios = [];
+    for (let venta of local.ventas) {
+        if (!anios.includes(venta.fecha.getFullYear()))
+            anios.push(venta.fecha.getFullYear())
+    }
+    return anios
+
 }
 console.log(renderPorMes());
 

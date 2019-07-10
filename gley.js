@@ -74,11 +74,10 @@ console.log(componenteMasVendido());
 // // Ventas por mes:
 // // Total de enero 2019: 1250
 // // Total de febrero 2019: 4210
-
 const renderPorMes = () => {
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
-        "Septiembre", "Octubre", "Noviembre", "diciembre"]
+        "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     const ventasTotales = [];
 
     for (let i = 0; i < meses.length; i++) {
@@ -134,19 +133,26 @@ console.log(renderPorSucursal());
 // // Producto estrella: Monitor GPRS 3000
 // // Vendedora que más ingresos generó: Grace
 
-const render = () => {
-    renderPorMes();
-    renderPorSucursal();
+const vendedoraConMasIngresosGenerados = () => {
+    let masVentas = 0;
+    let vendedoraConMasIngresos = "";
+    for (vendedora of local.vendedoras) {
+        if (ventasVendedora(vendedora) >= masVentas) {
+            masVentas = ventasVendedora(vendedora);
+            vendedoraConMasIngresos = vendedora;
+        }
+    }
+    return vendedoraConMasIngresos;
 }
-let mejorVendedora = function () {
-    let vendedora = '';
-    let mayoresVentas = 0;
-    for (let i = 0; i < local.vendedoras.length; i++) {
-        if (ventasVendedora(local.vendedoras[i]) > mayoresVentas) {
-            vendedora = local.vendedoras[i];
-            mayoresVentas = ventasVendedora(local.vendedoras[i]);
-        };
-    };
-    return `Vendedora que más ingresos generó: ${vendedora}`;
-};
+const render = () => {
+    let renderCompleto =
+        (`Reporte 
+${renderPorMes()}
+${renderPorSucursal()}
+Vendedora con más ingresos: ${vendedoraConMasIngresosGenerados()}
+Componente más vendido: ${componenteMasVendido()}`);
+
+    return renderCompleto;
+}
 console.log(render());
+

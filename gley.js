@@ -1,20 +1,7 @@
 // TRABAJO PRÁCTICO NÚMERO 2
 // Integrantes: Gleyser y Sofía.
-// Ejercicios:
-//1- Funciones:
-// 1.1precioMaquina(componentes) SOFI
-// 1.2cantidadVentasComponente(componente): GLEY
-// 1.3 vendedoraDelMes(mes, anio) usar precioMaquina SOFI 
-// 1.4 ventasMes(mes, anio): GLEY
-// 1.5 ventasVendedora(nombre): SOFI
-// 1.6 componenteMasVendido(): usar cantidadVentasComponente GLEY
-// 1.7 huboVentas(mes, anio): SOFI
-//2-SOFI
-//3-GLEY
 
-// 1.2 cantidadVentasComponente(componente): recibe un componente y devuelve la cantidad de veces que fue vendido, 
-// o sea que formó parte de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está
-// identificada por la variable ventas.
+// 1.2 cantidadVentasComponente(componente)
 
 const cantidadVentasComponente = (componenteABuscar) => {
     let cantidadVentas = 0
@@ -30,8 +17,7 @@ const cantidadVentasComponente = (componenteABuscar) => {
 
 console.log(cantidadVentasComponente("Monitor ASC 543"));
 
-//1.4 ventasMes(mes, anio): Obtener las ventas de un mes. 
-// El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).
+//1.4 ventasMes(mes, anio)
 
 const ventasMes = (mes, anio) => {
 
@@ -46,8 +32,7 @@ const ventasMes = (mes, anio) => {
 
 console.log(`${ventasMes(1, 2019)}`);
 
-//1.6 componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. 
-//El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente
+//1.6 componenteMasVendido()
 
 const componenteMasVendido = () => {
     const componentes = local.precios.map(elemento => elemento.componente)
@@ -66,14 +51,8 @@ const componenteMasVendido = () => {
 }
 console.log(componenteMasVendido());
 
-// 3. Para tener una mejor muestra de como está resultando el local, queremos desarrollar un reporte que nos muestre 
-// las ventas por sucursal y por mes. Para esto, necesitamos crear las siguientes funciones:
 
-// 3.1 renderPorMes(): Muestra una lista ordenada del importe total vendido por cada mes/año
-// console.log( renderPorMes() );
-// // Ventas por mes:
-// // Total de enero 2019: 1250
-// // Total de febrero 2019: 4210
+// 3.1 renderPorMes()
 const renderPorMes = () => {
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
@@ -103,11 +82,7 @@ const obtenerAnios = () => {
 }
 console.log(renderPorMes());
 
-// 3.2 renderPorSucursal(): Muestra una lista del importe total vendido por cada sucursal
-// console.log( renderPorSucursal() );
-// // Ventas por sucursal:
-// // Total de Centro: 4195
-// // Total de Caballito: 1265
+// 3.2 renderPorSucursal()
 
 const renderPorSucursal = function () {
     let tituloInforme = 'Ventas por sucursal:';
@@ -119,18 +94,7 @@ const renderPorSucursal = function () {
 }
 console.log(renderPorSucursal());
 
-// 3.3 render(): Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y 
-// la vendedora que más ingresos generó
-// console.log( render() );
-// // Reporte
-// // Ventas por mes:
-// //   Total de enero 2019: 1250
-// //   Total de febrero 2019: 4210
-// // Ventas por sucursal:
-// //   Total de Centro: 4195
-// //   Total de Caballito: 1265
-// // Producto estrella: Monitor GPRS 3000
-// // Vendedora que más ingresos generó: Grace
+// 3.3 render()
 
 const vendedoraConMasIngresosGenerados = () => {
     let masVentas = 0;
